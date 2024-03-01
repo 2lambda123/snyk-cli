@@ -21,6 +21,7 @@ export async function startMockServer() {
   const SNYK_API = SNYK_HOST + BASE_API;
 
   const env: Record<string, string> = {
+    ...process.env,
     PATH: process.env.PATH ?? '',
     SNYK_TOKEN,
     SNYK_API,

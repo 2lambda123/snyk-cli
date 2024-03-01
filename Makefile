@@ -10,6 +10,7 @@ export SHELL=/bin/bash
 WORKING_DIR = $(CURDIR)
 PKG := npx pkg ./ --compress Brotli --options max_old_space_size=32768
 PKG_NODE_VERSION := $(shell head -1 .nvmrc | cut -f1 -d '.')
+ARCH :=$(shell arch)
 BINARY_WRAPPER_DIR = ts-binary-wrapper
 EXTENSIBLE_CLI_DIR = cliv2
 BINARY_RELEASES_FOLDER_TS_CLI = binary-releases
@@ -247,9 +248,10 @@ clean-golang:
 .PHONY: acceptance-test-with-proxy
 acceptance-test-with-proxy: pre-build
 	@echo "-- Running acceptance tests in a proxied environment"
-	@docker build -t acceptance-test-with-proxy -f ./test/acceptance/environments/proxy/Dockerfile .
-	@docker run --rm --cap-add=NET_ADMIN acceptance-test-with-proxy ./node_modules/.bin/jest ./ts-binary-wrapper/test/acceptance/basic.spec.ts
-# TODO: Run all acceptance tests behind a proxy using npm run test:acceptance
+# TODO: docker buildx step can be removed once https://github.com/snyk/cli/pull/5079 is merged and we deploy a test image defined in ./scriptes/create-test-image.sh
+	@docker buildx build --build-arg NODEVERSION=$(PKG_NODE_VERSION) --build-arg ARCH=$(ARCH) -t acceptance-test-with-proxy -f ./scripts/environments/proxy/Dockerfile .
+# TODO: 'acceptance-test-with-proxy' needs to be replaced with the deployed test image defined in ./scriptes/create-test-image.sh
+	@docker run --rm --cap-add=NET_ADMIN --env "TEST_SNYK_COMMAND=$(TEST_SNYK_COMMAND)" --env "TEST_SNYK_TOKEN=$(TEST_SNYK_TOKEN)" acceptance-test-with-proxy npm run test:acceptance
 
 # targets responsible for the CLI release
 .PHONY: release-pre
