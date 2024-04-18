@@ -8,7 +8,7 @@ To install the required development dependencies in homebrew based environments,
 The only additional prerequisite is having [homebrew](https://brew.sh/) installed.
 
 ```sh
-./scripts/install-dev-dependencies.sh
+make install-deps
 ```
 
 ## Setting up
@@ -17,7 +17,7 @@ Clone this repository with git.
 
 ```sh
 git clone git@github.com/snyk/cli.git
-cd snyk
+cd cli
 ```
 
 You will now be on our `main` branch. You should never commit to this branch, but you should keep it up-to-date to ensure you have the latest changes.
@@ -37,14 +37,17 @@ make clean
 
 To build the project, run the following command in the root of the repository.
 
+Now we trigger the build process:
+
 ```sh
-make build
+make build-local
 ```
 
-Run the build binary like this.
+Run the build binary like this, depending on your architecture:
 
 ```sh
 ./binary-releases/snyk-macos --version
+./binary-releases/snyk-macos-arm64 --version
 ```
 
 ## Running tests
@@ -114,6 +117,14 @@ You can run acceptance tests with:
 
 ```
 npm run test:acceptance -- --selectProjects coreCli
+```
+
+The output is saved as _junit.xml_ inside the root folder.
+
+Another example, if we want the output in console and to run a single test suite by name:
+
+```
+npm run test:acceptance -- --selectProjects coreCli --reporters=default -t 'woof'
 ```
 
 ### Smoke Tests
