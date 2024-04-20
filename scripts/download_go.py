@@ -39,7 +39,7 @@ def extract_sha256sum_from_file(file):
     print("Extracting sha256sum from file: " + file)
 
     with open(file, "r") as f:
-        first_line = f.readline().strip()  # Read the first line and remove leading/trailing whitespace
+        first_line = f.readline(5_000_000).strip()  # Read the first line and remove leading/trailing whitespace
         first_word = first_line.split()[0]  # Sp
     
     return first_word
