@@ -36,6 +36,17 @@ def calculate_sha256sum(file):
 
 # extract sha256sum from file contents
 def extract_sha256sum_from_file(file):
+    """    Extracts the sha256sum from the contents of a file.
+
+    This function opens the specified file and reads the first line to extract the sha256sum value.
+
+    Args:
+        file (str): The path to the file from which the sha256sum will be extracted.
+
+    Returns:
+        str: The extracted sha256sum value.
+    """
+
     print("Extracting sha256sum from file: " + file)
 
     with open(file, "r") as f:
