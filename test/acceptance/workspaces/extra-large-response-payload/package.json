@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "upgradable application",
   "dependencies": {
-    "yarn": "1.22.13"
+    "yarn": "1.22.22"
   },
   "devDependencies": {}
 }
