@@ -10,7 +10,7 @@ def get_latest_commit_sha(name):
     headers = {
         "Accept": "application/vnd.github.v3+json",
     }
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=60)
     response.raise_for_status()
     commits = response.json()
     return commits[0]['sha']
