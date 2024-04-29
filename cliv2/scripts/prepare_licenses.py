@@ -9,7 +9,7 @@ def manual_license_download(url, package_name):
 
     if not os.path.exists(license_file_name):
         os.makedirs(folder_path, exist_ok=True)
-        with requests.get(url, stream=True, allow_redirects=True) as response:
+        with requests.get(url, stream=True, allow_redirects=True, timeout=60) as response:
             response.raise_for_status()
             with open(license_file_name, "wb") as license_file:
                 for chunk in response.iter_content(chunk_size=8192):

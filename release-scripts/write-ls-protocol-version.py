@@ -11,14 +11,14 @@ def get_goreleaser_yaml(commit) -> int:
     api_url = f'https://api.github.com/repos/snyk/snyk-ls/contents/.goreleaser.yaml?ref={commit}'
 
     # Send a GET request to the GitHub API
-    response = requests.get(api_url)
+    response = requests.get(api_url, timeout=60)
 
     if response.status_code == 200:
         # Parse the JSON response to get the content URL
         content_url = response.json()['download_url']
 
         # Fetch the content of the .goreleaser.yaml file
-        content_response = requests.get(content_url)
+        content_response = requests.get(content_url, timeout=60)
 
         if content_response.status_code == 200:
             yaml_content = content_response.text
