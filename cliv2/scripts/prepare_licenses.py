@@ -4,6 +4,18 @@ import requests
 import re
 
 def manual_license_download(url, package_name):
+    """    Download the license file from the given URL and save it to the specified package directory.
+
+    Args:
+        url (str): The URL of the license file to be downloaded.
+        package_name (str): The name of the package for which the license is being downloaded.
+
+
+    Raises:
+        requests.exceptions.HTTPError: If an HTTP error occurs during the download process.
+        OSError: If an OS level error occurs while creating directories or writing the license file.
+    """
+
     folder_path = os.path.join(".", "internal", "embedded", "_data", "licenses", package_name)
     license_file_name = os.path.normpath(os.path.join(folder_path, "LICENSE"))
 
