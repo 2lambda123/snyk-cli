@@ -31,9 +31,9 @@ def main():
     # Try to find all licenses via the go.mod file
     go_bin_path = os.path.join(os.getcwd(), "_cache")
     os.environ["GOBIN"] = go_bin_path
-    os.system(f"go install github.com/google/go-licenses@latest")
+    os.system("go install github.com/google/go-licenses@latest")
     os.environ["PATH"] += os.pathsep + go_bin_path
-    os.system(f"go-licenses save ./... --save_path=./internal/embedded/_data/licenses --force --ignore github.com/snyk/cli/cliv2/")
+    os.system("go-licenses save ./... --save_path=./internal/embedded/_data/licenses --force --ignore github.com/snyk/cli/cliv2/")
 
     manual_license_download("https://raw.githubusercontent.com/davecgh/go-spew/master/LICENSE", "github.com/davecgh/go-spew")
     manual_license_download("https://raw.githubusercontent.com/alexbrainman/sspi/master/LICENSE", "github.com/alexbrainman/sspi")
