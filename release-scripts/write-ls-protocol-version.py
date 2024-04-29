@@ -7,6 +7,20 @@ import sys
 
 
 def get_goreleaser_yaml(commit) -> int:
+    """    Get the LS_PROTOCOL_VERSION from the .goreleaser.yaml file for a specific commit.
+
+    This function sends a GET request to the GitHub API to retrieve the .goreleaser.yaml file content
+    for a specific commit. It then parses the YAML content to extract the value of LS_PROTOCOL_VERSION
+    under the env section.
+
+    Args:
+        commit (str): The specific commit for which the .goreleaser.yaml file content is to be retrieved.
+
+    Returns:
+        int: The value of LS_PROTOCOL_VERSION if found in the .goreleaser.yaml file, otherwise returns -1, -2, or -3
+            based on different failure scenarios.
+    """
+
     # Define the GitHub repository URL and API endpoint
     api_url = f'https://api.github.com/repos/snyk/snyk-ls/contents/.goreleaser.yaml?ref={commit}'
 
