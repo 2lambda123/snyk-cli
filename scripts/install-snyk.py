@@ -4,8 +4,7 @@ import hashlib
 import os
 import platform
 import time
-
-import requests
+from security import safe_requests
 
 
 def get_os_arch():
@@ -69,10 +68,10 @@ def download_snyk_cli(download_version, base_url):
 
     url = f"{base_url}/cli/{download_version}/{filename}"
 
-    response = requests.get(url, timeout=60)
+    response = safe_requests.get(url, timeout=60)
 
     if response.status_code == 200:
-        sha_response = requests.get(url + ".sha256", timeout=60)
+        sha_response = safe_requests.get(url + ".sha256", timeout=60)
         if not sha_response:
             print("SHA256 checksum not available. Aborting download.")
             return

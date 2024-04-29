@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import subprocess
-
-import requests
+from security import safe_requests
 
 
 def get_latest_commit_sha(name):
@@ -25,7 +24,7 @@ def get_latest_commit_sha(name):
     headers = {
         "Accept": "application/vnd.github.v3+json",
     }
-    response = requests.get(url, headers=headers, timeout=60)
+    response = safe_requests.get(url, headers=headers, timeout=60)
     response.raise_for_status()
     commits = response.json()
     return commits[0]['sha']
