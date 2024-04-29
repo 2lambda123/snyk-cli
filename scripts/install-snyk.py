@@ -40,6 +40,19 @@ def get_os_arch():
 
 
 def download_snyk_cli(download_version, base_url):
+    """    Download the Snyk CLI from the specified base URL.
+
+    This function downloads the Snyk CLI from the provided base URL and saves it to the current directory.
+    It also verifies the integrity of the downloaded file using SHA256 checksum.
+
+    Args:
+        download_version (str): The version of the Snyk CLI to download.
+        base_url (str): The base URL from which to download the Snyk CLI.
+
+    Returns:
+        int: 0 if the download and verification are successful, 1 if there is a failure.
+    """
+
     success = 0
     fail = 1
 
