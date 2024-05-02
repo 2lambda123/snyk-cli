@@ -4,8 +4,7 @@ import hashlib
 import os
 import platform
 import time
-
-import requests
+from security import safe_requests
 
 
 def get_os_arch():
@@ -40,6 +39,19 @@ def get_os_arch():
 
 
 def download_snyk_cli(download_version, base_url):
+    """    Download the Snyk CLI from the specified base URL.
+
+    This function downloads the Snyk CLI from the provided base URL and saves it to the current directory.
+    It also verifies the integrity of the downloaded file using SHA256 checksum.
+
+    Args:
+        download_version (str): The version of the Snyk CLI to download.
+        base_url (str): The base URL from which to download the Snyk CLI.
+
+    Returns:
+        int: 0 if the download and verification are successful, 1 if there is a failure.
+    """
+
     success = 0
     fail = 1
 
@@ -56,10 +68,10 @@ def download_snyk_cli(download_version, base_url):
 
     url = f"{base_url}/cli/{download_version}/{filename}"
 
-    response = requests.get(url, timeout=60)
+    response = safe_requests.get(url, timeout=60)
 
     if response.status_code == 200:
-        sha_response = requests.get(url + ".sha256", timeout=60)
+        sha_response = safe_requests.get(url + ".sha256", timeout=60)
         if not sha_response:
             print("SHA256 checksum not available. Aborting download.")
             return

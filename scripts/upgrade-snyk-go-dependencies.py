@@ -1,16 +1,30 @@
 #!/usr/bin/env python3
 import argparse
 import subprocess
-
-import requests
+from security import safe_requests
 
 
 def get_latest_commit_sha(name):
+    """    Get the latest commit SHA for a given repository.
+
+    This function retrieves the latest commit SHA for a specified repository on GitHub.
+
+    Args:
+        name (str): The name of the repository.
+
+    Returns:
+        str: The SHA of the latest commit in the specified repository.
+
+    Raises:
+        HTTPError: If an HTTP error occurs when making the request.
+        Timeout: If the request times out.
+    """
+
     url = f"https://api.github.com/repos/snyk/{name}/commits"
     headers = {
         "Accept": "application/vnd.github.v3+json",
     }
-    response = requests.get(url, headers=headers, timeout=60)
+    response = safe_requests.get(url, headers=headers, timeout=60)
     response.raise_for_status()
     commits = response.json()
     return commits[0]['sha']
