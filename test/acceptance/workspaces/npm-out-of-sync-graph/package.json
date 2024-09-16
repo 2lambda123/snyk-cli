@@ -12,9 +12,9 @@
     "debug": "4.3.4",
     "undefsafe": "^2.0.3",
     "aws-sdk": "^2.1603.0",
-    "axios": "^1.6.8",
+    "axios": "^1.7.4",
     "bignumber.js": "^7.2.1",
-    "body-parser": "^1.18.2"
+    "body-parser": "^1.20.3"
   },
   "devDependencies": {
     "eslint": "5.9.0",
