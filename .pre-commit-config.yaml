@@ -2,6 +2,6 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.19.3
+    rev: v8.20.1
     hooks:
       - id: gitleaks
