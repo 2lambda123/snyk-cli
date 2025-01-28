@@ -10,6 +10,6 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "cdktf-cli": "^0.20.7"
+      "cdktf-cli": "^0.20.11"
     }
   }
